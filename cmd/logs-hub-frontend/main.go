@@ -9,8 +9,8 @@ import (
 	"syscall"
 	"time"
 
-	"apisrv/pkg/app"
-	"apisrv/pkg/db"
+	"logs-hub-frontend/pkg/app"
+	"logs-hub-frontend/pkg/db"
 
 	"github.com/BurntSushi/toml"
 	"github.com/getsentry/sentry-go"
@@ -20,7 +20,7 @@ import (
 	"github.com/vmkteam/embedlog"
 )
 
-const appName = "apisrv"
+const appName = "logs-hub-frontend"
 
 var (
 	fs           = flag.NewFlagSetWithEnvPrefix(os.Args[0], strings.ToUpper(appName), 0)

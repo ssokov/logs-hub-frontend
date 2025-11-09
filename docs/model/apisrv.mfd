@@ -1,5 +1,5 @@
 <Project xmlns:xsi="" xmlns:xsd="">
-    <Name>apisrv.mfd</Name>
+    <Name>logs-hub-frontend.mfd</Name>
     <PackageNames>
         <string>common</string>
         <string>vfs</string>

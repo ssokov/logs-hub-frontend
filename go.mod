@@ -1,4 +1,4 @@
-module apisrv
+module logs-hub-frontend
 
 go 1.24.5
 

@@ -3,8 +3,8 @@ package app
 import (
 	"context"
 
-	"apisrv/pkg/client"
-	"apisrv/pkg/frontend"
+	"logs-hub-frontend/pkg/client"
+	"logs-hub-frontend/pkg/frontend"
 
 	"github.com/go-pg/pg/v10"
 	"github.com/labstack/echo/v4"

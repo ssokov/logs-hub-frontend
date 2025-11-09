@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"html/template"
 
-	"apisrv/pkg/client"
+	"logs-hub-frontend/pkg/client"
 
 	"github.com/labstack/echo/v4"
 	"github.com/vmkteam/embedlog"
