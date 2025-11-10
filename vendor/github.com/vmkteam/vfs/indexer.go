@@ -20,12 +20,13 @@ import (
 	"sync"
 	"time"
 
+	"github.com/vmkteam/vfs/db"
+
 	"github.com/bbrks/go-blurhash"
 	"github.com/go-pg/pg/v10"
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/labstack/echo/v4"
 	"github.com/vmkteam/embedlog"
-	"github.com/vmkteam/vfs/db"
 	"go.uber.org/atomic"
 )
 

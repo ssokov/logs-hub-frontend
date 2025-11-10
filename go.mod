@@ -6,15 +6,11 @@ require (
 	github.com/BurntSushi/toml v1.5.0
 	github.com/getsentry/sentry-go v0.35.3
 	github.com/go-pg/pg/v10 v10.15.0
-	github.com/go-pg/urlstruct v1.0.1
-	github.com/hypnoglow/go-pg-monitor v1.2.0
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/namsral/flag v1.7.4-pre
 	github.com/vmkteam/appkit v0.0.1
 	github.com/vmkteam/embedlog v0.1.3
 	github.com/vmkteam/vfs v1.4.0
-	github.com/vmkteam/zenrpc-middleware v1.3.0
-	github.com/vmkteam/zenrpc/v2 v2.2.12
 )
 
 require (
@@ -24,6 +20,7 @@ require (
 	github.com/codemodus/kace v0.5.1 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/getsentry/sentry-go/echo v0.35.3 // indirect
+	github.com/go-pg/urlstruct v1.0.1 // indirect
 	github.com/go-pg/zerochecker v0.2.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/hashicorp/golang-lru v1.0.2 // indirect
@@ -46,6 +43,8 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser v0.1.2 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
+	github.com/vmkteam/zenrpc-middleware v1.3.0 // indirect
+	github.com/vmkteam/zenrpc/v2 v2.2.12 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	golang.org/x/crypto v0.42.0 // indirect
@@ -54,7 +53,6 @@ require (
 	golang.org/x/sync v0.17.0 // indirect
 	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.29.0 // indirect
-	golang.org/x/time v0.11.0 // indirect
 	golang.org/x/tools v0.36.0 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.36.9 // indirect

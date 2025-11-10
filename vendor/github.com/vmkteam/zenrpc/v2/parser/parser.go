@@ -10,9 +10,10 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/vmkteam/zenrpc/v2/smd"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
+
+	"github.com/vmkteam/zenrpc/v2/smd"
 )
 
 const (

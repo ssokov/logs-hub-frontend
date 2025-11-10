@@ -45,7 +45,6 @@ func (wm *WidgetManager) Init() error {
 }
 
 func (wm *WidgetManager) MainHandler(c echo.Context) error {
-
 	services, err := wm.client.Services.GetAllServices(c.Request().Context())
 
 	if err != nil {

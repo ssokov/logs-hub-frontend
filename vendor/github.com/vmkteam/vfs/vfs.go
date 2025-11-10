@@ -23,10 +23,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/vmkteam/vfs/db"
+
 	"github.com/gabriel-vasile/mimetype"
 	"github.com/go-pg/pg/v10"
 	"github.com/vmkteam/embedlog"
-	"github.com/vmkteam/vfs/db"
 )
 
 const (

@@ -10,8 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-pg/pg/v10"
 	"github.com/vmkteam/vfs/db"
+
+	"github.com/go-pg/pg/v10"
 	"github.com/vmkteam/zenrpc/v2"
 )
 

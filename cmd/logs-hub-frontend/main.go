@@ -10,11 +10,9 @@ import (
 	"time"
 
 	"logs-hub-frontend/pkg/app"
-	"logs-hub-frontend/pkg/db"
 
 	"github.com/BurntSushi/toml"
 	"github.com/getsentry/sentry-go"
-	"github.com/go-pg/pg/v10"
 	"github.com/namsral/flag"
 	"github.com/vmkteam/appkit"
 	"github.com/vmkteam/embedlog"
@@ -41,8 +39,6 @@ func main() {
 		sl = embedlog.NewDevLogger()
 	}
 	slog.SetDefault(sl.Log()) // set default logger
-	ql := db.NewQueryLogger(sl)
-	pg.SetLogger(ql)
 
 	version := appkit.Version()
 	sl.Print(ctx, "starting", "app", appName, "version", version)

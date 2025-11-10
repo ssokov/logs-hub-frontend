@@ -26,6 +26,7 @@ import (
 	"time"
 
 	"golang.org/x/sync/errgroup"
+
 	"golang.org/x/tools/go/gcexportdata"
 	"golang.org/x/tools/internal/gocommand"
 	"golang.org/x/tools/internal/packagesinternal"
