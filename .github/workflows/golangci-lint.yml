@@ -1,27 +1,28 @@
-name: Frontend CI
+name: Go Linters
+
 on:
   push:
-    tags:
-      - v*
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 permissions:
   contents: read
   pull-requests: read
 
 jobs:
-  lint-frontend:
-    name: lint-frontend
+  lint-go:
+    name: lint-go
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          node-version: '18'
-      - name: Install dependencies
-        run: npm install
-      - name: Run linting
-        run: npm run lint
+          go-version: '1.24.x'
+          
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: latest

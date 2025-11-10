@@ -12,11 +12,6 @@ LINT_VERSION := v2.4.0
 
 MAIN := ${NAME}/cmd/${NAME}
 
-export PGDATABASE
-export PGHOST
-export PGPORT
-export PGUSER
-export PGPASSWORD
 
 .PHONY: *
 
@@ -26,12 +21,6 @@ init:
 
 show-env:
 	@echo "NAME=$(NAME)"
-	@echo "TEST_PGDATABASE=$(TEST_PGDATABASE)"
-	@echo "PGDATABASE=$(PGDATABASE)"
-	@echo "PGHOST=$(PGHOST)"
-	@echo "PGPORT=$(PGPORT)"
-	@echo "PGUSER=$(PGUSER)"
-	@echo "PGPASSWORD=$(PGPASSWORD)"
 	@echo "GOFLAGS=$(GOFLAGS)"
 
 tools:
@@ -55,13 +44,6 @@ run:
 	@echo "Compiling"
 	@go run $(GOFLAGS) $(MAIN) -config=cfg/local.toml -dev
 
-generate:
-	#@go generate ./pkg/rpc
-	@go generate ./pkg/vt
-
-test:
-	@echo "Running tests"
-	@PGDATABASE=$(TEST_PGDATABASE) go test -count=1 $(GOFLAGS) -coverprofile=coverage.txt -covermode count $(PKG)
 
 test-short:
 	@go test $(GOFLAGS) -v -test.short -test.run="Test[^D][^B]" -coverprofile=coverage.txt -covermode count $(PKG)
@@ -71,28 +53,6 @@ mod:
 	@go mod vendor
 	@git add vendor
 
-db:
-	@dropdb --if-exists -f $(PGDATABASE)
-	@createdb $(PGDATABASE)
-	@psql -f docs/$(NAME).sql $(PGDATABASE)
-	@psql -f docs/init.sql $(PGDATABASE)
-
-db-test:
-	@$(MAKE) --no-print-directory db PGDATABASE=${TEST_PGDATABASE}
-
-NS := "NONE"
-
-mfd-xml:
-	@mfd-generator xml -c "postgres://$(PGUSER):$(PGPASSWORD)@$(PGHOST):$(PGPORT)/$(PGDATABASE)?sslmode=disable" -m ./docs/model/$(NAME).mfd
-mfd-model:
-	@mfd-generator model -m ./docs/model/$(NAME).mfd -p db -o ./pkg/db
-mfd-repo: --check-ns
-	@mfd-generator repo -m ./docs/model/$(NAME).mfd -p db -o ./pkg/db -n $(NS)
-mfd-db-test:
-	@mfd-generator dbtest -m docs/model/$(NAME).mfd -o ./pkg/db/test -x $(NAME)/pkg/db
-mfd-xml-lang:
-	#TODO: add namespaces support for xml-lang command
-	@mfd-generator xml-lang  -m ./docs/model/$(NAME).mfd
 
 
 
