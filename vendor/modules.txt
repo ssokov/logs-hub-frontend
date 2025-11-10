@@ -126,7 +126,7 @@ github.com/vmihailenco/tagparser/internal/parser
 github.com/vmihailenco/tagparser/v2
 github.com/vmihailenco/tagparser/v2/internal
 github.com/vmihailenco/tagparser/v2/internal/parser
-# github.com/vmkteam/appkit v0.0.1
+# github.com/vmkteam/appkit v0.1.2
 ## explicit; go 1.24.5
 github.com/vmkteam/appkit
 # github.com/vmkteam/embedlog v0.1.3

@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"net/http"
 
 	"logs-hub-frontend/pkg/client"
 	"logs-hub-frontend/pkg/frontend"
@@ -37,7 +38,7 @@ type App struct {
 	echo    *echo.Echo
 
 	wm     *frontend.WidgetManager
-	client *client.Client
+	client *logshub.Client
 }
 
 func New(appName string, sl embedlog.Logger, cfg Config) *App {
@@ -48,7 +49,7 @@ func New(appName string, sl embedlog.Logger, cfg Config) *App {
 		Logger:  sl,
 	}
 
-	a.client = client.NewDefaultClient(a.cfg.Client.Endpoint)
+	a.client = logshub.NewClient(a.cfg.Client.Endpoint, &http.Client{})
 	a.wm = frontend.NewWidgetManager(a.Logger, a.client)
 
 	return a
@@ -56,6 +57,7 @@ func New(appName string, sl embedlog.Logger, cfg Config) *App {
 
 // Run is a function that runs application.
 func (a *App) Run(ctx context.Context) error {
+	a.registerDebugHandlers()
 	a.registerHandlers()
 
 	err := a.wm.Init()

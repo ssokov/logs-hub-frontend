@@ -8,9 +8,10 @@ require (
 	github.com/go-pg/pg/v10 v10.15.0
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/namsral/flag v1.7.4-pre
-	github.com/vmkteam/appkit v0.0.1
+	github.com/vmkteam/appkit v0.1.2
 	github.com/vmkteam/embedlog v0.1.3
 	github.com/vmkteam/vfs v1.4.0
+	github.com/vmkteam/zenrpc/v2 v2.2.12
 )
 
 require (
@@ -44,7 +45,6 @@ require (
 	github.com/vmihailenco/tagparser v0.1.2 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/vmkteam/zenrpc-middleware v1.3.0 // indirect
-	github.com/vmkteam/zenrpc/v2 v2.2.12 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	golang.org/x/crypto v0.42.0 // indirect

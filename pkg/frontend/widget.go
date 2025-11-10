@@ -16,10 +16,10 @@ type WidgetManager struct {
 
 	template *template.Template
 
-	client *client.Client
+	client *logshub.Client
 }
 
-func NewWidgetManager(logger embedlog.Logger, client *client.Client) *WidgetManager {
+func NewWidgetManager(logger embedlog.Logger, client *logshub.Client) *WidgetManager {
 	return &WidgetManager{Logger: logger, client: client}
 }
 
@@ -45,7 +45,7 @@ func (wm *WidgetManager) Init() error {
 }
 
 func (wm *WidgetManager) MainHandler(c echo.Context) error {
-	services, err := wm.client.Services.GetAllServices(c.Request().Context())
+	services, err := wm.client.Logs.Get(c.Request().Context())
 
 	if err != nil {
 		wm.Error(c.Request().Context(), "services get failed", "err", err)
