@@ -43,6 +43,20 @@ func NewClient(endpoint string, httpClient *http.Client) *Client {
 	return c
 }
 
+type LogResponse struct {
+	Error_code int         `json:"error_code"`
+	Message    string      `json:"message"`
+	Params     interface{} `json:"params"`
+	Tg_user_id int         `json:"tg_user_id"`
+	Timestamp  string      `json:"timestamp"`
+	Type       string      `json:"type"`
+}
+
+type LogServiceResponse struct {
+	Logs    []LogResponse   `json:"logs"`
+	Service ServiceResponse `json:"service"`
+}
+
 type ServiceResponse struct {
 	ID   string `json:"ID"`
 	Name string `json:"Name"`
@@ -63,6 +77,18 @@ func (c *svcLogs) Get(ctx context.Context) (res []ServiceResponse, err error) {
 	}{}
 
 	err = c.client.call(ctx, "logs.Get", _req, &res)
+
+	return
+}
+
+func (c *svcLogs) GetLogsByServiceID(ctx context.Context, serviceID int) (res LogServiceResponse, err error) {
+	_req := struct {
+		ServiceID int
+	}{
+		ServiceID: serviceID,
+	}
+
+	err = c.client.call(ctx, "logs.GetLogsByServiceID", _req, &res)
 
 	return
 }

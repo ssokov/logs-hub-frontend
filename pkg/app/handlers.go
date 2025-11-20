@@ -3,6 +3,7 @@ package app
 import (
 	"context"
 	"fmt"
+
 	"github.com/vmkteam/appkit"
 )
 
@@ -16,7 +17,8 @@ func (a *App) runHTTPServer(ctx context.Context, host string, port int) error {
 }
 
 func (a *App) registerHandlers() {
-	a.echo.GET("/main", a.wm.MainHandler)
+	a.echo.GET("/services", a.wm.ServicesHandler)
+	a.echo.GET("/logs/:service_id", a.wm.LogsByServiceIDHandler)
 }
 
 // registerDebugHandlers adds /debug/pprof handlers into a.echo instance.

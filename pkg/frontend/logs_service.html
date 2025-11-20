@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Логи сервиса</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+             min-height:100vh;padding:30px;color:#333}
+        .container{max-width:1100px;margin:0 auto}
+        .header{text-align:center;color:#fff;margin-bottom:18px}
+        .header h1{font-size:2rem;text-shadow:0 2px 4px rgba(0,0,0,.25)}
+        .service-box{background:rgba(255,255,255,0.06);padding:12px 16px;border-radius:12px;
+                     display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#fff}
+        .service-meta{display:flex;gap:12px;align-items:center}
+        .service-meta .id{font-family:'Courier New',monospace;background:rgba(255,255,255,0.06);
+                           padding:6px 10px;border-radius:8px}
+
+        .table-container{background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.15);overflow:hidden}
+        table{width:100%;border-collapse:collapse}
+        thead{background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)}
+        th{padding:14px 16px;color:#fff;text-align:left;font-weight:600}
+        td{padding:12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+        tbody tr:hover{background:#f8fbff}
+        .mono{font-family:'Courier New',monospace}
+        .muted{opacity:.85}
+        .params{font-size:0.9rem;background:#f7f9fc;padding:8px;border-radius:8px;white-space:pre-wrap;overflow:auto;max-width:420px;max-height:140px}
+        .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,0.06);font-weight:700}
+        .error-row{background:linear-gradient(90deg, rgba(255,230,230,0.9), #fff)}
+        .type-error{color:#c0392b;font-weight:700}
+        .type-warn{color:#d35400;font-weight:700}
+        .type-info{color:#2980b9;font-weight:700}
+        footer{color:#fff;text-align:center;margin-top:14px;opacity:.9}
+
+        @media (max-width:900px){
+            .service-box{flex-direction:column;align-items:flex-start;gap:8px}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> Просмотр Логов</h1>
+        </div>
+
+        <!-- Service info -->
+        <div class="service-box">
+            <div class="service-meta">
+                <div>
+                    <div style="font-size:0.9rem;opacity:.9">Сервис</div>
+                    <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+                        <div class="id mono">ID: {{.Service.ID}}</div>
+                        <div class="tag">{{.Service.Name}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="muted" style="font-size:0.9rem">Логов: {{len .Logs}}</div>
+        </div>
+
+        <!-- Logs table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Время</th>
+                        <th>Тип</th>
+                        <th>Код</th>
+                        <th>Сообщение</th>
+                        <th>tg_user_id</th>
+                        <th>Параметры</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Logs}}
+                    <tr {{if or (eq .Type "error") (ge .Error_code 500)}}class="error-row"{{end}}>
+                        <!-- Timestamp приходит как строка в LogResponse.Timestamp -->
+                        <td class="mono">{{if .Timestamp}}{{.Timestamp}}{{else}}—{{end}}</td>
+
+                        <td class="{{if eq .Type "error"}}type-error{{else if eq .Type "warn"}}type-warn{{else}}type-info{{end}}">
+                            {{if .Type}}{{.Type}}{{else}}—{{end}}
+                        </td>
+
+                        <td>{{.Error_code}}</td>
+
+                        <td>{{if .Message}}{{.Message}}{{else}}—{{end}}</td>
+
+                        <td class="mono">{{.Tg_user_id}}</td>
+
+                        <td>
+                            <!-- В сгенерированном LogResponse поле Params отсутствует/закомментировано.
+                                 Если в будущем появится params, замените этот блок на:
+                                 {{if .Params}}<div class="params">{{printf "%#v" .Params}}</div>{{else}}—{{end}} -->
+                            <span class="muted">—</span>
+                        </td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+
+        <footer>← <a href="/services" style="color:#fff;text-decoration:underline">Назад к списку сервисов</a></footer>
+    </div>
+</body>
+</html>
